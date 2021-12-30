@@ -4,17 +4,11 @@
 # ---------------------- Exercise 1 ------------------------
 def board(n):
     """
-    Kataskeuastis board (pinaka paixnidiou).
-    Kataskeuazei anaparastasi pinaka paixnidiou me n x n kelia, opou
-    kanena keli den einai zwntano.
-    Epistrefei apaparastasi pinaka paixnidiou, h opoia einai
-    ena le3iko (dict) me n*n stoixeia.
-    Ka8e keli antistoixei se ena stoixeio me key to tuple (i,j), opou
-    i o ari8mos grammis kai j o ari8mos stilis pou brisketai to keli.
-    (H ari8misi grammwn kai sthlwn einai apo 0 ews n-1. To panw aristera keli
-    brisketai sto (0,0).)
-    H timi (value) tou stoixeiou einai True 'h False analoga
-    ean to keli einai zwntano 'h oxi.
+    Creates the game's board with n x n cells. All cells must have
+    a 'dead' status. Returns the game's board which is a dictionary with n x n elements.
+    Each cell corresponds to a dictionary element with its key being a tuple (i,j), where i is the row number
+    and j the column number. (The first cell is at (0,0) position). The element's value is True or False depending on
+    the cell's status ('dead' or 'alive').
 
      Examples:
     >>> game = board(3)
@@ -26,7 +20,7 @@ def board(n):
     False
 
     :param n: Board's dimension.
-    :return:
+    :return: The game's board which is a dictionary with n x n elements.
     """
 
     dictionary = {}
@@ -123,12 +117,11 @@ def copy_board(board):
 # ---------------------- Exercise 4 ------------------------
 def get_iterator(board):
     """
-    Iterator gia sarwsi stoixeiwn pinaka paixnidiou.
-    Epistrefei iterator pou dinei ta kelia tou board arxizontas apo
-    ta kelia tis grammis 0: (0,0), (0,1), (0,2),..., meta akolou8oun ta
-    kelia tis grammis 1: (1,0), (1,1), (1,2),... ktl. mexri na e3antli8oun
-    ola ta kelia. Gia ka8e keli, o iterator epistrefei tin 8esi tou kai
-    logiki timi True 'h False analogws ean einai zwntano 'h oxi.
+    Iterator that scans the board's elements.
+    Returns an iterator which contains the board's cells starting from
+    row 0: (0,0), (0,1), (0,2),..., then row 1: (1,0), (1,1), (1,2)... etc.
+    until all cells are scanned. For each cell the iterator returns its position
+    and a boolean value (True or False) depending on the cell's status (dead or alive).
 
      Examples:
     >>> game = board(3)
@@ -147,7 +140,7 @@ def get_iterator(board):
     ((2, 2), False)
 
     :param board: The game's board.
-    :return: A new board which is a copy of the current one.
+    :return: An iterator that scans the board's elements.
     """
 
     a = list(board.items())
@@ -158,6 +151,29 @@ def get_iterator(board):
 
 # ---------------------- Exercise 5 ------------------------
 def print_board(board):
+    """
+    Displays the game's board. Living cells are pictured
+    with a black square (unicode character 11035) and dead cells
+    are pictured with a white square (unicode character 11036).
+    Starting position is at (0,0).
+
+     Example:
+    >>> game = board(5)
+    >>> set_alive(game, (0,0), True)
+    >>> set_alive(game, (2,2), True)
+    >>> set_alive(game, (4,4), True)
+    >>> set_alive(game, (3,4), True)
+    >>> set_alive(game, (0,4), True)
+    >>> print_board(game)
+    ⬛⬜⬜⬜⬛
+    ⬜⬜⬜⬜⬜
+    ⬜⬜⬛⬜⬜
+    ⬜⬜⬜⬜⬛
+    ⬜⬜⬜⬜⬛
+
+    :param board: The game's board.
+    """
+
     s = 0
     for item in get_iterator(board):
         s = s + 1
@@ -173,6 +189,21 @@ def print_board(board):
 
 # ---------------------- Exercise 6 ------------------------
 def neighbors(p):
+    """
+    Neighboring cells.
+
+     Examples:
+    >>> neighbors((3,2)) == {(3, 3), (3, 1), (2, 1), (2, 3), (4, 3), (2, 2), (4, 2), (4, 1)}
+    True
+    >>> neighbors((0,0)) == {(0, 1), (-1, 1), (-1, 0), (-1, -1), (0, -1), (1, 0), (1, -1), (1, 1)}
+    True
+    >>> neighbors((0,10)) == {(-1, 9), (1, 10), (-1, 11), (0, 11), (-1, 10), (1, 9), (0, 9), (1, 11)}
+    True
+
+    :param p: Cell's position (tuple in (i,j) form).
+    :return: A set which contains the 8 neighboring cells of p cell. Does not contain p itself.
+    """
+
     newset = set
     s = p[1] - 1
 
@@ -335,7 +366,8 @@ def tick(board):
 # ---------------------- Exercise 9 ------------------------
 
 if __name__ == '__main__':
-    """Starts the game for a specific initial setting, for 100 generations.
+    """
+    Starts the game for a specific initial setting, for 100 generations.
     The game board is displayed at each step. Leaves 3 blank lines between consecutive tables.
     """
 

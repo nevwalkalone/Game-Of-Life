@@ -18,9 +18,9 @@ This is a simple implementation of [Conway's Game of Life](https://en.wikipedia.
 
    ```
 
-2. **Open Game-Of-Life** folder as a project in Pycharm.
+2. **Open Game-Of-Life** folder as a project in Pycharm
 
-3. **Run** the project.
+3. **Run** the project
 
 ## Contributions
 
